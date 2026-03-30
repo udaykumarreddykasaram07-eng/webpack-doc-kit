@@ -38,14 +38,6 @@ jobs:
             echo "New webpack commit detected, syncing."
           fi
 
-      - name: Checkout webpack
-        if: steps.check.outputs.changed == 'true'
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          repository: webpack/webpack
-          ref: ${{ steps.latest.outputs.latest }}
-          path: webpack
-
       - name: Setup Node.js
         if: steps.check.outputs.changed == 'true'
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
@@ -60,6 +52,10 @@ jobs:
       - name: Update HEAD_COMMIT
         if: steps.check.outputs.changed == 'true'
         run: echo "${{ steps.latest.outputs.latest }}" > HEAD_COMMIT
+
+      - name: Clone webpack
+        if: steps.check.outputs.changed == 'true'
+        run: npm run clone-webpack
 
       - name: Regenerate docs
         if: steps.check.outputs.changed == 'true'
