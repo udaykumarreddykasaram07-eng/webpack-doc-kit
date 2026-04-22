@@ -1,5 +1,5 @@
 import { Application } from 'typedoc';
-import webpack from './webpack/package.json' with { type: 'json' };
+import webpack from '../webpack/package.json' with { type: 'json' };
 import { major } from 'semver';
 
 const app = await Application.bootstrapWithPlugins({
@@ -22,7 +22,7 @@ const app = await Application.bootstrapWithPlugins({
   disableSources: true,
   propertiesFormat: 'table',
 
-  entryFileName: 'index',
+  modulesFileName: 'index',
   tsconfig: 'tsconfig.json',
 });
 
